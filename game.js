@@ -18,13 +18,13 @@ window.addEventListener('DOMContentLoaded', function() {
 // document.addEventListener('keydown', movementHandler); 
 document.addEventListener('keydown', moveSurvivor); 
 
-// ====================== SETUP FOR CANVAS RENDERING ======================= //
+//SETUP FOR CANVAS RENDERING 
 // 2D rendering context for canvas element
 // This is used for drawing shapes, text, images, etc. 
 game.setAttribute('height', getComputedStyle(game)['height']);
 game.setAttribute('width', getComputedStyle(game)['width']);
 
-// ====================== ENTITIES ======================= //
+//ENTITIES 
 
 class Runner {
   constructor(x, y, color, width, height) {
@@ -41,7 +41,7 @@ class Runner {
        }
 
   }
-}
+};
 
 // KEYBOARD LOGIC
 function moveSurvivor(e) {
@@ -60,9 +60,9 @@ function moveSurvivor(e) {
 
 
 
-// ====================== GAME PROCESSES ======================= //
+//GAME PROCESSES 
 function gameLoop() {
   //clear the canvas
   ctx.clearRect(0, 0, game.width, game.height);
   survivor.render();
-}
+};

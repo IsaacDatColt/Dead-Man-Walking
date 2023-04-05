@@ -47,8 +47,26 @@ body {
     justify-content: center;
     align-items: center;
   }
-  
 
+  #top-left {
+    margin-top: 0px; 
+    display: flex;
+    justify-content: left;
+    align-items: left;
+}
+  
+  #startButton {
+    background-color: #404040;
+    color: #FFF;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#startButton:hover {
+    background-color: #666;
+}
   main {
     grid-area: game;
   }
