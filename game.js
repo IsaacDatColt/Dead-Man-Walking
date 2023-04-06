@@ -2,16 +2,18 @@
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
+const zomb = document.getElementById('zomb');
 // ctx.imageSmoothingEnabled = false;
 let survivor;
 let zombie;
+console.log(zomb);
 
 
 
 // EVENT LISTENERS
 window.addEventListener('DOMContentLoaded', function() {
   survivor = new Runner(200, 200, 'white', 25, 25, 60);
-  zombie = new Zombie(100, 100, 'green', 25, 25, 300);
+  zombie = new Zombie(100, 100, zomb, 40, 40, 500);
 
 
   //run the game loop
@@ -20,12 +22,22 @@ window.addEventListener('DOMContentLoaded', function() {
   const survivors = setInterval(surviorLoop, survivor.speed);
 });
 
+let gameStarted = false;
+
+function gameLoop() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.imageSmoothingEnabled = false;
+
+  survivor.render();
+  zombie.render();
+}
+
 // document.addEventListener('keydown', movementHandler); 
 document.addEventListener('keydown', moveSurvivor); 
 
 //SETUP FOR CANVAS RENDERING 
 // 2D rendering context for canvas element
-// This is used for drawing shapes, text, images, etc. 
 game.setAttribute('height', getComputedStyle(game)['height']);
 game.setAttribute('width', getComputedStyle(game)['width']);
 
@@ -50,18 +62,18 @@ class Runner {
 };
 
 class Zombie {
-  constructor(x, y, color, width, height, speed) {
+  constructor(x, y, image, width, height, speed) {
     this.x = x;
     this.y = 0;
-    this.color = color;
+    this.image = image;
     this.width = width;
     this.height = height;
     this.alive = true;
     this.speed = speed;
 
     this.render = function() {
-      ctx.fillStyle = this.color;
-      ctx.fillRect(this.x, this.y, this.width, this.height);
+      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+
     }
   }
 }
@@ -100,13 +112,6 @@ function moveZombie(zombie) {
 
 
 
-//GAME PROCESSES 
-function gameLoop() {
-  //clear the canvas
-  ctx.clearRect(0, 0, game.width, game.height);
-
-  // survivor.render();
-};
 
 function surviorLoop() {
   // moveSurvivor(e);
