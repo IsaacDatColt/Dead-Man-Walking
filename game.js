@@ -10,7 +10,10 @@ let survivor;
 let zombie;
 let numZombies = 0;
 const zombies = [];
-
+let runGame;
+let survivors;
+let zombiesInterval;
+const startButton = document.getElementById('startButton');
 
 
 
@@ -20,12 +23,13 @@ console.log(zomb);
 
 
 
-// EVENT LISTENERS
+// EVENT LISTENERS 
 window.addEventListener('DOMContentLoaded', function() {
   survivor = new Runner(400, 340, surv, 50, 50, 60);
   zombie = new Zombie(canvas.width / 2, 0, zomb, 40, 40, 800);
 
   // run the game loop
+  startButton.addEventListener('click', function() {
   runGame = setInterval(gameLoop, 100);
 
   // const zombies = setInterval(zombieLoop, zombie.speed);
@@ -35,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
   
 
-});
+})});
 
 
 
@@ -163,7 +167,7 @@ function survivorLoop() {
 
 //zombie loop function so that new zombies are pushed in at random every 10 seconds
 function zombieLoop() { {
-    if (Math.random() < 0.001) { // add a new zombie with a 5% chance
+    if (Math.random() < 0.001) { // add a new zombie with a 0.001% chance to enter every 10 seconds
       zombies.push(new Zombie(canvas.width / 2, 0, zomb, 40, 40, 100));
       numZombies++;
     }
