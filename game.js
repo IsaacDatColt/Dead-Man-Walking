@@ -17,14 +17,15 @@ const zombies2 = [];
 let runGame;
 let survivors;
 let zombiesInterval;
+let countdown = 60;
+let timer;
+
+
 
 
 
 const startButton = document.getElementById('startButton');
-
-
-
-
+const timerDisplay = document.getElementById('timer');
 
 
 // console.log(zomb);
@@ -39,13 +40,14 @@ window.addEventListener('DOMContentLoaded', function () {
   startButton.addEventListener('click', function () {
     runGame = setInterval(gameLoop, 100);
     survivor = new Runner(400, 340, surv, 50, 50, 100);
+    timer = setInterval(updateTimer, 1000);
 
     // survivors = setInterval(survivorLoop, survivor.speed);
-    // zombiesInterval = setInterval(zombieLoop, 2200);
+    // zombiesInterval = setInterval(zombieLoop, 100);
     // zombiesInterval2 = setInterval(zombieLoop2, zombie2.speed);
     // zombie = new Zombie(200, 0, zomb, 40, 40, 1200);
     // zombie2 = new Zombie2(0, 200, zomb, 40, 40, 1200);
-    
+
   })
 
 }
@@ -184,6 +186,7 @@ function gameLoop() {
       alert("Game Over");
       break;
     }
+  
   }
  
 
@@ -213,7 +216,8 @@ function survivorLoop() {
 
 //zombie loop function so that new zombies are pushed in at random every 10 seconds
 function zombieLoop() {
-  
+  ctx.imageSmoothingEnabled = false;
+
     if (Math.random() < 0.0015) { // add a new zombie with a 0.015% chance to enter every 10 seconds
       zombies.push(new Zombie(100, 0, zomb, 40, 40, 1200));
       zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
@@ -271,4 +275,27 @@ setInterval(() => {
     numZombies++;
   }
 }, 1000);
+
+
+function updateTimer() {
+  countdown--;
+  const minutes = Math.floor(countdown / 60);
+  const seconds = countdown % 60;
+  const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  timerDisplay.textContent = formattedTime;
+  
+  if (countdown === 0) {
+    clearInterval(timer);
+    const winMessage = document.createElement('div');
+    winMessage.textContent = 'YOU WIN';
+    winMessage.style.position = 'absolute';
+    winMessage.style.top = '50%';
+    winMessage.style.left = '50%';
+    winMessage.style.transform = 'translate(-50%, -50%)';
+    winMessage.style.fontSize = '48px';
+    gameContainer.appendChild(winMessage);
+  }
+}
+
+
 

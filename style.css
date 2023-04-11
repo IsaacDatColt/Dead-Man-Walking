@@ -7,7 +7,7 @@ body {
     padding-top: 1em;
     background-color: #191919;
     color: #FFF;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Creepster', cursive;
     text-align: center;
     background-size: cover;
     background-repeat: space;
@@ -22,6 +22,8 @@ body {
 
   }
 
+  
+  
   
   
   
@@ -53,8 +55,14 @@ body {
 
    #gameTitle {
     grid-area: top-center;
-    color: black;
-
+    color: red;
+    font-size: 30px;
+    margin-bottom: -40px;
      /* filter: blur(3px) opacity(0.7);  */
 
   } 
+
+#timer {
+    color: red;
+    font-size: 50px;
+}
