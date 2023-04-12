@@ -6,6 +6,11 @@ canvas.height = gameContainer.clientHeight;
 const ctx = canvas.getContext('2d');
 const zomb = document.getElementById('zomb');
 const surv = document.getElementById('surv');
+const startButton = document.getElementById('startButton');
+const timerDisplay = document.getElementById('timer');
+const rulesButton = document.getElementById('rulesButton');
+const rulesModal = document.getElementById('rulesModal');
+const closeButton = document.getElementById('closeButton');
 let survivor;
 let zombie;
 // let zombie2;
@@ -13,7 +18,7 @@ let zombie2;
 let numZombies = 0;
 let numZombies2 = 0;
 const zombies = [];
-const zombies2 = [];
+// const zombies2 = [];
 let runGame;
 let survivors;
 let zombiesInterval;
@@ -24,8 +29,8 @@ let timer;
 
 
 
-const startButton = document.getElementById('startButton');
-const timerDisplay = document.getElementById('timer');
+
+
 
 
 // console.log(zomb);
@@ -36,24 +41,32 @@ const timerDisplay = document.getElementById('timer');
 window.addEventListener('DOMContentLoaded', function () {
   // survivor = new Runner(400, 340, surv, 50, 50, 100);
    
-  // run the game loop
+
+  // Start Button Event Listener
   startButton.addEventListener('click', function () {
-    runGame = setInterval(gameLoop, 100);
-    survivor = new Runner(400, 340, surv, 50, 50, 100);
+    runGame = setInterval(gameLoop, 80);
+    survivor = new Runner(550, 400, surv, 50, 50, 10);
     timer = setInterval(updateTimer, 1000);
-
-    // survivors = setInterval(survivorLoop, survivor.speed);
-    // zombiesInterval = setInterval(zombieLoop, 100);
+    survivors = setInterval(survivorLoop, survivor.speed);
+    // zombiesInterval = setInterval(zombieLoop, zombie.speed);
     // zombiesInterval2 = setInterval(zombieLoop2, zombie2.speed);
-    // zombie = new Zombie(200, 0, zomb, 40, 40, 1200);
+    // zombie = new Zombie(200, 0, zomb, 40, 40, zombie.speed);
     // zombie2 = new Zombie2(0, 200, zomb, 40, 40, 1200);
-
+    
   })
 
 }
 
 );
 
+//rules Event listener
+rulesButton.addEventListener('click', () => {
+  rulesModal.style.display = 'block';
+});
+//close rules box
+closeButton.addEventListener('click', () => {
+  rulesModal.style.display = 'none';
+});
 
 
 
@@ -107,22 +120,22 @@ class Zombie {
   }
 }
 
-class Zombie2 {
-  constructor(x, y, image, width, height, speed) {
-    this.x = x;
-    this.y = y;
-    this.image = image;
-    this.width = width;
-    this.height = height;
-    this.alive = true;
-    this.speed = speed;
+// class Zombie2 {
+//   constructor(x, y, image, width, height, speed) {
+//     this.x = x;
+//     this.y = y;
+//     this.image = image;
+//     this.width = width;
+//     this.height = height;
+//     this.alive = true;
+//     this.speed = speed;
 
-    this.render = function () {
-      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+//     this.render = function () {
+//       ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
 
-    }
-  }
-}
+//     }
+//   }
+// }
 
 
 
@@ -157,26 +170,27 @@ function moveZombie(zombie) {
 
   }
 }
-function moveZombie2(zombie2) {
-  const directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-  const randomDirection = directions[Math.floor(Math.random() * directions.length)];
-  if (randomDirection === 'ArrowUp') {
-    zombie2.y - 10 >= 0 ? (zombie2.y -= 5) : null;
-  } else if (randomDirection === 'ArrowDown') {
-    zombie2.y + 15 <= canvas.height - zombie2.height ? (zombie2.y += 5) : null;
-  } else if (randomDirection === 'ArrowRight') {
-    zombie2.x + 6 <= canvas.width - zombie2.width ? (zombie2.x += 7) : null;
-  }
-  // } else if (randomDirection === 'ArrowLeft') {
-  //   zombie2.x - 10 >= 0 ? (zombie2.x -= 5) : null;
-  // }
-}
+// function moveZombie2(zombie2) {
+//   const directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
+//   const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+//   if (randomDirection === 'ArrowUp') {
+//     zombie2.y - 10 >= 0 ? (zombie2.y -= 5) : null;
+  
+//   // } else if (randomDirection === 'ArrowDown') {
+//   //   zombie2.y + 15 <= canvas.height - zombie2.height ? (zombie2.y += 5) : null;
+//   } else if (randomDirection === 'ArrowRight') {
+//     zombie2.x + 6 <= canvas.width - zombie2.width ? (zombie2.x += 7) : null;
+//   }
+//    else if (randomDirection === 'ArrowLeft') {
+//     zombie2.x - 10 >= 0 ? (zombie2.x -= 5) : null;
+//   }
+// }
+
 
 //GAME Processes  GAMELOOP
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.imageSmoothingEnabled = false;
-  
 
   for (let i = 0; i < numZombies; i++) {
     if (checkCollision(survivor, zombies[i])) {
@@ -202,30 +216,36 @@ function gameLoop() {
 
   // zombieLoop2();
   zombieLoop();
-  survivor.render();
-  // zombie.render();
+  // survivor.render();
 
 }
 
 
-//Seperate Game processing ==== SURVIVOR LOOP
+// Seperate Game processing ==== SURVIVOR LOOP
 function survivorLoop() {
   survivor.render();
+  ctx.imageSmoothingEnabled = false;
+
 }
 
 
 //zombie loop function so that new zombies are pushed in at random every 10 seconds
 function zombieLoop() {
   ctx.imageSmoothingEnabled = false;
+  
 
     if (Math.random() < 0.0015) { // add a new zombie with a 0.015% chance to enter every 10 seconds
-      zombies.push(new Zombie(100, 0, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(380, 360, zomb, 40, 40, 100));
       zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(960, 0, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(860, 0, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(940, 0, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(900, 0, zomb, 40, 40, 1200));
       zombies.push(new Zombie(660, 0, zomb, 40, 40, 1200));
       zombies.push(new Zombie(560, 0, zomb, 40, 40, 1200));
       zombies.push(new Zombie(700, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(760, 130, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(760, 350, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
+      zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
       zombies.push(new Zombie(0, 100, zomb, 40, 40, 1200));
       zombies.push(new Zombie(0, 260, zomb, 40, 40, 1200));
       zombies.push(new Zombie(60, 0, zomb, 40, 40, 1200));
@@ -242,7 +262,7 @@ function zombieLoop() {
     zombies[i].render();
   }
  
-  zombieIntervalSpeed = 2200;
+  // zombieIntervalSpeed = 2200;
 }
 
 // Zombie spawn Timer
@@ -255,16 +275,21 @@ setInterval(() => {
     zombies.push(new Zombie(300, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(500, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(400, 0, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(600, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(960, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(1060, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(1000, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(8400, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(1000, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(880, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(300, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(160, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(500, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(700, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(260, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(560, 0, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(760, 130, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(760, 230, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(200, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(1000, 130, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(1000, 230, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(1000, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(125, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(0, 150, zomb, 40, 40, 1200));
     zombies.push(new Zombie(0, 300, zomb, 40, 40, 1200));
@@ -276,13 +301,14 @@ setInterval(() => {
   }
 }, 1000);
 
-
+//Timer Function for countdown and Win display
 function updateTimer() {
-  countdown--;
-  const minutes = Math.floor(countdown / 60);
-  const seconds = countdown % 60;
+  countdown -= 1;
+  const minutes = Math.floor(countdown / 90);
+  const seconds = countdown % 90;
   const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   timerDisplay.textContent = formattedTime;
+
   
   if (countdown === 0) {
     clearInterval(timer);

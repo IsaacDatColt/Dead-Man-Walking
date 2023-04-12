@@ -12,7 +12,7 @@
     <div class="imageContainer">
         <img src="./img/Zombie.png" alt="zombie" id="zomb" style="display: none;">
         <img src="./img/TheSurvivor2.png" alt="survivor" id="surv" style="display: none;">
-
+        
       </div>
     <div id="gameContainer">
         <!-- <aside id="top-left"><button id="startButton">Start</button></aside> -->
@@ -21,9 +21,27 @@
          <canvas id="game"></canvas>
          <div id="timer">00:00</div> 
          <button id="startButton">Start</button>
+         <button id="rulesButton">Rules</button>
+
        </main>
       
     </div>
+    <div id="rulesModal">
+        <h1>Rules</h1>
+        <p>Welcome to the Zombie Survival Game!
+
+            A horde of zombies has broken through the fence and is coming for you! The only way to survive is to disguise yourself so that they don't recognize you as a living human. You have to survive for a minute and a half without being touched by any zombies for help to arrive.
+            
+            But be careful! If you touch a zombie, they will know that you're alive and they will eat you. Move quickly and stay alert to avoid the zombies and survive until the timer runs out.
+            
+            Do you have what it takes to survive the zombie apocalypse? Play the game and find out!</p>
+        <ul>
+          <li>Controls: Arrow Keys for movement (UP, DOWN, LEFT, RIGHT). </li>
+          <!-- <li>Rule 2</li>
+          <li>Rule 3</li> -->
+        </ul>
+        <button id="closeButton">Close</button>
+      </div>
 
     <script src="./game.js"></script>
   </body>
