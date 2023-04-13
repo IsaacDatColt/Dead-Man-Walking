@@ -37,11 +37,6 @@ window.addEventListener('DOMContentLoaded', function () {
     runGame = setInterval(gameLoop, 80);
     survivor = new Runner(550, 400, surv, 50, 50, 10);
     timer = setInterval(updateTimer, 1000);
-    // survivors = setInterval(survivorLoop, survivor.speed);
-    // zombiesInterval = setInterval(numZombies, zombie.speed);
-    // zombiesInterval2 = setInterval(zombieLoop2, zombie2.speed);
-    // zombie = new Zombie(200, 0, zomb, 40, 40, zombie.speed);
-    // zombie2 = new Zombie2(0, 200, zomb, 40, 40, 1200);
     
   })
 

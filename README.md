@@ -19,6 +19,12 @@ If you touch a zombie, the game is over.
 Move quickly and stay alert to avoid the zombies.
 Good luck!
 
+## How it started
+Inspired by tv shows and the thrill of surviving a zombie apocalypse, I wanted to make a game that has a story for every level or map that can be played.  
+
+## My sketch: 
+![Sketch](img/Sketch.png)
+
 ## Installation
 To play the game, you need to clone this repository from GitHub (https://github.com/IsaacDatColt/Dead-Man-Walking) to your local machine and open the index.html file in your browser.
 
@@ -111,11 +117,6 @@ setInterval(() => {
 }, 300);
 ```
 
-## How it started
-Inspired by tv shows and the thrill of surviving a zombie apocalypse, I wanted to make a game that has a story for every level or map that can be played.  
-
-## My sketch: 
-![Sketch](img/Sketch.png)
 
 ## Future Goals/Considerations
 - [ ]I want to be able to add more features to the game such as weapons, zombie vaccine, health bar/timer. The idea will be to have weapons drop for a certain amount of time and if you find your way to them, you will be able to use them for a certain amount of time. Vaccine will be like a 2nd chance at life if you get bit. Get it and use it before you turn to a zombie!
