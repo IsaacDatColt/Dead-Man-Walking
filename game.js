@@ -1,4 +1,5 @@
 // console.log('link check');
+// GLOBAL DOM / VARIABLES
 const gameContainer = document.getElementById('gameContainer');
 const canvas = document.getElementById('game');
 canvas.width = gameContainer.clientWidth;
@@ -26,17 +27,6 @@ let countdown = 60;
 let timer;
 
 
-
-
-
-
-
-
-
-// console.log(zomb);
-
-
-
 // EVENT LISTENERS 
 window.addEventListener('DOMContentLoaded', function () {
   // survivor = new Runner(400, 340, surv, 50, 50, 100);
@@ -47,8 +37,8 @@ window.addEventListener('DOMContentLoaded', function () {
     runGame = setInterval(gameLoop, 80);
     survivor = new Runner(550, 400, surv, 50, 50, 10);
     timer = setInterval(updateTimer, 1000);
-    survivors = setInterval(survivorLoop, survivor.speed);
-    // zombiesInterval = setInterval(zombieLoop, zombie.speed);
+    // survivors = setInterval(survivorLoop, survivor.speed);
+    // zombiesInterval = setInterval(numZombies, zombie.speed);
     // zombiesInterval2 = setInterval(zombieLoop2, zombie2.speed);
     // zombie = new Zombie(200, 0, zomb, 40, 40, zombie.speed);
     // zombie2 = new Zombie2(0, 200, zomb, 40, 40, 1200);
@@ -160,7 +150,7 @@ function moveZombie(zombie) {
   const directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
   const randomDirection = directions[Math.floor(Math.random() * directions.length)];
   if (randomDirection === 'ArrowDown') {
-    zombie.y + 15 <= canvas.height - zombie.height ? (zombie.y += 4) : null;
+    zombie.y + 15 <= canvas.height - zombie.height ? (zombie.y += 8) : null;
   } else if (randomDirection === 'ArrowRight') {
     zombie.x + 6 <= canvas.width - zombie.width ? (zombie.x += 7) : null;
   } else if (randomDirection === 'ArrowLeft') {
@@ -187,7 +177,8 @@ function moveZombie(zombie) {
 // }
 
 
-//GAME Processes  GAMELOOP
+//GAME Processes  
+//GAMELOOP and collision detection
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.imageSmoothingEnabled = false;
@@ -203,7 +194,7 @@ function gameLoop() {
   
   }
  
-
+//collision Detection
   function checkCollision(obj1, obj2) {
     return (
       obj1.x + 20 < obj2.x + obj2.width &&
@@ -213,72 +204,45 @@ function gameLoop() {
     );
   }
   
-
-  // zombieLoop2();
   zombieLoop();
-  // survivor.render();
-
-}
-
-
-// Seperate Game processing ==== SURVIVOR LOOP
-function survivorLoop() {
   survivor.render();
-  ctx.imageSmoothingEnabled = false;
 
 }
 
 
-//zombie loop function so that new zombies are pushed in at random every 10 seconds
+
+//zombie loop function 
 function zombieLoop() {
   ctx.imageSmoothingEnabled = false;
   
 
-    if (Math.random() < 0.0015) { // add a new zombie with a 0.015% chance to enter every 10 seconds
-      zombies.push(new Zombie(380, 360, zomb, 40, 40, 100));
-      zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(960, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(860, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(940, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(900, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(660, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(560, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(700, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(760, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(0, 100, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(0, 260, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(60, 0, zomb, 40, 40, 1200));
-      zombies.push(new Zombie(100, 0, zomb, 40, 40, 1200));
-
-
+    if (Math.random() < 0.0015) { // add a new zombie with a 0.0015% chance to enter every 300s of a seconds
       numZombies++;
-     
-
     }
 
   for (let i = 0; i < numZombies; i++) {
     moveZombie(zombies[i]);
     zombies[i].render();
   }
- 
-  // zombieIntervalSpeed = 2200;
 }
 
 // Zombie spawn Timer
 setInterval(() => {
-  if (numZombies < 150) {
+  if (numZombies < 400) {
     zombies.push(new Zombie(canvas.width / 2, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(0, 300, zomb, 40, 40, 1200));
     zombies.push(new Zombie(0, 100, zomb, 40, 40, 1200));
     zombies.push(new Zombie(100, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(880, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(850, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(800, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(300, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(500, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(400, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(960, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(1060, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(1000, 0, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(8400, 0, zomb, 40, 40, 1200));
+    zombies.push(new Zombie(800, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(1000, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(880, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(300, 0, zomb, 40, 40, 1200));
@@ -287,8 +251,6 @@ setInterval(() => {
     zombies.push(new Zombie(700, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(260, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(560, 0, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(1000, 130, zomb, 40, 40, 1200));
-    zombies.push(new Zombie(1000, 230, zomb, 40, 40, 1200));
     zombies.push(new Zombie(1000, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(125, 0, zomb, 40, 40, 1200));
     zombies.push(new Zombie(0, 150, zomb, 40, 40, 1200));
@@ -299,7 +261,8 @@ setInterval(() => {
 
     numZombies++;
   }
-}, 1000);
+ 
+}, 300);
 
 //Timer Function for countdown and Win display
 function updateTimer() {

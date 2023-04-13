@@ -1,6 +1,9 @@
 html,body {
     margin: 0;
     padding: 0;
+    background-image: url("img/game-background-spooky-forest-fence-png.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
   }
 
 body {
@@ -19,13 +22,10 @@ body {
     height: 550px;
     padding-left: auto;
     padding-right: auto;   
-
+    /* position: relative;
+    z-index: 2;  */
   }
 
-  
-  
-  
-  
   
 #gameContainer {
     max-width: 70em;
@@ -60,7 +60,7 @@ body {
     font-size: 30px;
     margin-bottom: -40px;
      /* filter: blur(3px) opacity(0.7);  */
-
+   
   } 
 
 #timer {
@@ -99,3 +99,16 @@ body {
   #rulesButton {
     /* grid-area: btm-right; */
   }
+
+
+  /* .fog-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 87%;
+    background-color: rgba(0, 0, 0, 0.5); /* set the overlay color and transparency */
+    backdrop-filter: blur(3px); /* apply the blur effect */
+    z-index: 1; /* make sure the overlay is on top of the canvas */
+  }
+   */
