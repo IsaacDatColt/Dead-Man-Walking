@@ -216,7 +216,7 @@ function zombieLoop() {
   ctx.imageSmoothingEnabled = false;
   
 
-    if (Math.random() < 0.0015) { // add a new zombie with a 0.0015% chance to enter every 300s of a seconds
+    if (Math.random() < 0.0015) { // zombie is randomly generated with a 0.0015% chance every time the function is called.
       numZombies++;
     }
 
@@ -226,7 +226,7 @@ function zombieLoop() {
   }
 }
 
-// Zombie spawn Timer
+// Zombie spawn Timer that runs ever 300 milliseconds and pushes a new Zombie to an array
 setInterval(() => {
   if (numZombies < 400) {
     zombies.push(new Zombie(canvas.width / 2, 0, zomb, 40, 40, 1200));
