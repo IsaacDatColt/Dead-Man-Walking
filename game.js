@@ -160,21 +160,7 @@ function moveZombie(zombie) {
 
   }
 }
-// function moveZombie2(zombie2) {
-//   const directions = ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
-//   const randomDirection = directions[Math.floor(Math.random() * directions.length)];
-//   if (randomDirection === 'ArrowUp') {
-//     zombie2.y - 10 >= 0 ? (zombie2.y -= 5) : null;
-  
-//   // } else if (randomDirection === 'ArrowDown') {
-//   //   zombie2.y + 15 <= canvas.height - zombie2.height ? (zombie2.y += 5) : null;
-//   } else if (randomDirection === 'ArrowRight') {
-//     zombie2.x + 6 <= canvas.width - zombie2.width ? (zombie2.x += 7) : null;
-//   }
-//    else if (randomDirection === 'ArrowLeft') {
-//     zombie2.x - 10 >= 0 ? (zombie2.x -= 5) : null;
-//   }
-// }
+
 
 
 //GAME Processes  
