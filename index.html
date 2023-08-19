@@ -1,49 +1,58 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Dead Man Walking</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
-  </head>
-  <body>
-    <div class="imageContainer">
-        <img src="./img/Zombie.png" alt="zombie" id="zomb" style="display: none;">
-        <img src="./img/TheSurvivor2.png" alt="survivor" id="surv" style="display: none;">
-        <img src="./img/Sketch.png"  style="display: none;">
-        <img src="./img/game-background-spooky-forest-fence-600w-375717193.webp" alt="background" id="fence" style="display: none;">
+
+<head>
+  <meta charset="utf-8">
+  <title>Dead Man Walking</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div class="imageContainer">
+    <img src="./img/Zombie.png" alt="zombie" id="zomb" style="display: none;">
+    <img src="./img/TheSurvivor2.png" alt="survivor" id="surv" style="display: none;">
+    <img src="./img/Sketch.png" style="display: none;">
+    <img src="./img/game-background-spooky-forest-fence-600w-375717193.webp" alt="background" id="fence"
+      style="display: none;">
 
 
-      </div>
-    <div id="gameContainer">
-      <!-- <div class="fog-overlay"></div> -->
-          <aside id="gameTitle"><h1>Dead Man Walking</h1></aside> 
-        <main>
-         <canvas id="game"></canvas>
-         <div id="timer">00:00</div> 
-         <button id="startButton">Start</button>
-         <button id="rulesButton">Rules</button>
+  </div>
+  <div id="gameContainer">
+    <!-- <div class="fog-overlay"></div> -->
+    <aside id="gameTitle">
+      <h1>Dead Man Walking</h1>
+    </aside>
+    <main>
+      <canvas id="game"></canvas>
+      <div id="timer">00:00</div>
+      <button id="startButton">Start</button>
+      <button id="rulesButton">Rules</button>
 
-       </main>
-      
-    </div>
-    <div id="rulesModal">
-        <h1>Rules</h1>
-        <p>Welcome to the Zombie Survival Game!
+    </main>
 
-            A horde of zombies has broken through the fence and is coming for you! The only way to survive is to disguise yourself so that they don't recognize you as a living human. You have to survive for 60 seconds without being touched by any zombies for help to arrive.
-            
-            But be careful! If you touch a zombie, they will know that you're alive and they will eat you. Move quickly and stay alert to avoid the zombies and survive until the timer runs out.
-            
-            Do you have what it takes to survive the zombie apocalypse? Play the game and find out!</p>
-        <ul>
-          <li>Controls: Arrow Keys for movement (UP, DOWN, LEFT, RIGHT). </li>
-        </ul>
-        <button id="closeButton">Close</button>
-      </div>
+  </div>
+  <div id="rulesModal">
+    <h1>Rules</h1>
+    <p>Welcome to the Zombie Survival Game!
 
-    <script src="./game.js"></script>
-  </body>
+      A horde of zombies has broken through the fence and is coming for you! The only way to survive is to disguise
+      yourself so that they don't recognize you as a living human. You have to survive for 60 seconds without being
+      touched by any zombies for help to arrive.
+
+      But be careful! If you touch a zombie, they will know that you're alive and they will eat you. Move quickly and
+      stay alert to avoid the zombies and survive until the timer runs out.
+
+      Do you have what it takes to survive the zombie apocalypse? Play the game and find out!</p>
+    <ul>
+      <li>Controls: Arrow Keys for movement (UP, DOWN, LEFT, RIGHT). </li>
+    </ul>
+    <button id="closeButton">Close</button>
+  </div>
+
+  <script src="./game.js"></script>
+</body>
+
 </html>
