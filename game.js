@@ -41,7 +41,7 @@ function startGame() {
   runGame = setInterval(gameLoop, 80);
   survivor = new Runner(550, 400, surv, 50, 50, 10);
   timer = setInterval(updateTimer, 1000);
-  zombieSpawnInterval = setInterval(spawnZombies, 300);
+  zombieSpawnInterval = setInterval(spawnZombies, 10000);
 }
 
 class Runner {
@@ -59,7 +59,13 @@ class Runner {
   }
 }
 
-class Zombie extends Runner { }
+class Zombie extends Runner {
+  constructor(x, y, image, width, height, speed, type) {
+    super(x, y, image, width, height, speed);
+    this.type = type;
+  }
+}
+
 
 function moveSurvivor(e) {
   if (!survivor) return;
@@ -98,18 +104,32 @@ function gameLoop() {
 }
 
 function moveZombie(zombie) {
-  const deltaX = survivor.x - zombie.x;
-  const deltaY = survivor.y - zombie.y;
-  const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
+  if (zombie.type === 'follower') {
+    const deltaX = survivor.x - zombie.x;
+    const deltaY = survivor.y - zombie.y;
+    const distance = Math.sqrt(deltaX ** 2 + deltaY ** 2);
 
-  if (distance > 0) {
-    const moveSpeedX = (deltaX / distance) * zombie.speed;
-    const moveSpeedY = (deltaY / distance) * zombie.speed;
+    if (distance > 0) {
+      const moveSpeedX = (deltaX / distance) * zombie.speed;
+      const moveSpeedY = (deltaY / distance) * zombie.speed;
 
-    zombie.x += moveSpeedX;
-    zombie.y += moveSpeedY;
+      zombie.x += moveSpeedX;
+      zombie.y += moveSpeedY;
+    }
+  } else if (zombie.type === 'wanderer') {
+    // Logic to make the zombie trend downward with some randomness
+    let deviation = (Math.random() - 0.5) * Math.PI / 4; // Deviation up to +/- 45 degrees
+    let trendingDownwardAngle = Math.PI / 2 + deviation;
+
+    zombie.x += Math.cos(trendingDownwardAngle) * zombie.speed;
+    zombie.y += Math.sin(trendingDownwardAngle) * (0.5 * zombie.speed); // Make them move 1.5 times faster downwards
+
+    // Ensure zombies don't wander off the canvas
+    zombie.x = Math.min(canvas.width, Math.max(0, zombie.x));
+    zombie.y = Math.min(canvas.height, Math.max(0, zombie.y));
   }
 }
+
 
 
 function checkCollision(obj1, obj2) {
@@ -136,33 +156,21 @@ function checkCollision(obj1, obj2) {
 function spawnZombies() {
   const maxZombies = 400;
   if (zombies.length < maxZombies) {
-    let x, y;
-    const side = Math.floor(Math.random() * 4);
+    // Zombies spawn from anywhere along the top
+    let x = Math.random() * canvas.width;
+    let y = 0;
 
-    switch (side) {
-      case 0: // top
-        x = Math.random() * canvas.width;
-        y = 0;
-        break;
-      case 1: // right
-        x = canvas.width;
-        y = Math.random() * canvas.height;
-        break;
-      case 2: // bottom
-        x = Math.random() * canvas.width;
-        y = canvas.height;
-        break;
-      case 3: // left
-        x = 0;
-        y = Math.random() * canvas.height;
-        break;
-    }
+    const zombieType = Math.random() < 0.5 ? 'follower' : 'wanderer';
 
-    zombies.push(new Zombie(x, y, zomb, 40, 40, 2));
+    zombies.push(new Zombie(x, y, zomb, 40, 40, 3, zombieType));
   }
 }
 
-setInterval(spawnZombies, 300);
+
+
+setInterval(spawnZombies, 1000);
+
+
 
 function updateTimer() {
   countdown--;
@@ -187,5 +195,4 @@ function endGame(win = false) {
     alert("Game Over!");
   }
 
-  // TODO: Add reset functionality if needed
 }
